@@ -130,6 +130,8 @@ jar {
 publishing {
     publications {
         mavenJava(MavenPublication) {
+            artifactId = "fakeplayers"
+
             from components.java
         }
     }
@@ -140,5 +142,15 @@ publishing {
         // Notice: This block does NOT have the same function as the block in the top level.
         // The repositories here will be used for publishing your artifact, not for
         // retrieving dependencies.
+        /*maven {
+            url "file://C:/maven-local/mcmodsrepo"
+        }*/
+        maven {
+            url "https://maven.pkg.github.com/LubieKakao1212/fakeplayer"
+            credentials {
+                username = System.getenv("USERNAME")
+                password = System.getenv("TOKEN")
+            }
+        }
     }
 }

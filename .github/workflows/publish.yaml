@@ -12,11 +12,13 @@ jobs:
         with:
           distribution: zulu
           java-version: 17
-      - run: export TOKEN=${{ secrets.GITHUB_TOKEN }}
-      - run: export USERNAME=${{ github.actor }}
+      #- run: export TOKEN=${{ secrets.GITHUB_TOKEN }}
+      #- run: export USERNAME=${{ github.actor }}
+      - run: echo "TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
+      - run: echo "USERNAME=${{ github.actor }}" >> $GITHUB_ENV
       - run: gradle publish --no-daemon
         working-directory: ./platform-fabric-1.19.4
-      - run: export -n TOKEN
-        if: always()
-      - run: export -n USERNAME
-        if: always()
+#      - run: export -n TOKEN
+#        if: always()
+#      - run: export -n USERNAME
+#        if: always()

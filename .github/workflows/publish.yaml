@@ -10,9 +10,7 @@ jobs:
       - uses: gradle/actions/setup-gradle@v3
       - run: export TOKEN=${{ secrets.GITHUB_TOKEN }}
       - run: export USERNAME=${{ github.actor }}
-      - run: cd platform-fabric-1.19.4
-      - run: pwd
-      - run: gradle publish --no-daemon
+      - run: gradle platform-fabric-1.19.4:publish --no-daemon
       - run: export -n TOKEN
         if: always()
       - run: export -n USERNAME

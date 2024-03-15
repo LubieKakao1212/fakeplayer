@@ -60,40 +60,8 @@ public class HumanoidEntity extends PathAwareEntity {
     }
 
     @Override
-    public void onDamaged(DamageSource damageSource) {
-        super.onDamaged(damageSource);
-        if (this.inventory != null) {
-            boolean healedOnce = false;
-            for (int i = 0; i < this.inventory.size(); i++) {
-                ItemStack itemStack = this.inventory.getStack(i);
-                if (itemStack.getItem().equals(Items.GOLDEN_APPLE) || itemStack.getItem().equals(Items.ENCHANTED_GOLDEN_APPLE)) {
-                    inventory.setStack(i, this.eatFood(this.getWorld(), itemStack));
-                    if (inventory.getStack(i).isEmpty()) {
-                        inventory.setStack(i, ItemStack.EMPTY);
-                        healedOnce = true;
-                    }
-                }
-            }
-            if (!healedOnce) {
-                for (int i = 0; i < this.inventory.size(); i++) {
-                    ItemStack itemStack = this.inventory.getStack(i);
-                    if (itemStack.isFood()) {
-                        int count = itemStack.getCount();
-                        for (int x = 1; (x <= count) || (this.getHealth() < this.getMaxHealth()); x++) {
-                            inventory.setStack(i, this.eatFood(this.getWorld(), itemStack));
-                            this.heal(1);
-                            if (inventory.getStack(i).isEmpty()) {
-                                inventory.setStack(i, ItemStack.EMPTY);
-                                break;
-                            }
-                        }
-                        if (!(this.getHealth() < this.getMaxHealth())) {
-                            break;
-                        }
-                    }
-                }
-            }
-        }
+    protected void applyDamage(DamageSource source, float amount) {
+        super.applyDamage(source, amount);
     }
 
     @Override
